@@ -1,35 +1,34 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import './App.css';
+import { animals } from './components/animals';
 
-function App() {
-  const [count, setCount] = useState(0)
+const App = () => {
 
+const title = "";
+const background = <img src='/images/ocean.jpg' className='background' alt='ocean' />
+
+const images = []; // Initialize the images array
+
+// Use a for...in loop to iterate over the animals object
+for (let animal in animals) {
+  images.push(
+    <img
+      key={animal} // Unique key for each image
+      className="animal" // Class name
+      alt={animal} // Alternative text
+      src={animals[animal].image} // Image source
+      aria-label={animal} // Accessible label
+      role="button" // Accessibility role
+    />
+  );
+}
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <div>
+      <h1>{title === "" ? 'Click an animal for a fun fact' : title}</h1>
+      {background}
+      <div className='animals'>{images}</div>
+    </div>
   )
 }
 
-export default App
+
+export default App;
